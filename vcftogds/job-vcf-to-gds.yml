@@ -1,3 +1,5 @@
+# cwltool --outdir exec vcf-to-gds.cwl job-vcf-to-gds.yml
+
 vcf_files:
   - class: File
     path: ../test-data/vcf/1KG_phase3_subset_chr22.vcf.gz
