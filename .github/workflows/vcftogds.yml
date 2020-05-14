@@ -1,0 +1,32 @@
+name: vcf2gds
+
+on: [push]
+
+jobs:
+  test-vcf2gds:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.6]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Cache docker
+      uses: actions/cache@v1
+      env:
+        cache-name: cache-docker-image
+      with:
+        path: /var/lib/docker/
+        key: ${{ runner.os }}-build-${{ env.cache-name }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install cwltool
+    - name: Test with cwltool
+      run: |
+        cd vcftogds
+        cwltool --outdir exec vcf-to-gds.cwl job-vcf-to-gds.yml 
