@@ -13,7 +13,7 @@ requirements:
   - entryname: script.sh
     writable: false
     entry: |-
-      set -e
+      set -x
       SCRIPT=/usr/local/analysis_pipeline/R/check_gds.R
       CHROM=${return inputs.gds_file.path.split('chr')[1].split('.')[0];}
       Rscript $SCRIPT check_gds.config --chromosome $CHROM || true

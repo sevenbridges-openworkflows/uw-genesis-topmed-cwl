@@ -17,7 +17,7 @@ requirements:
     - entryname: script.sh
       writable: false
       entry: |
-        set -e
+        set -x
         Rscript /usr/local/analysis_pipeline/R/unique_variant_ids.R unique_variant_ids.config || true
 
     - entryname: unique_variant_ids.config
