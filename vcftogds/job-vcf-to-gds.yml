@@ -1,7 +1,7 @@
 vcf_files:
   - class: File
-    path: ../test-data/1KG_phase3_subset_chr22.vcf.gz
+    path: ../test-data/vcf/1KG_phase3_subset_chr22.vcf.gz
   - class: File
-    path: ../test-data/1KG_phase3_subset_chr11.vcf.gz
+    path: ../test-data/vcf/1KG_phase3_subset_chr11.vcf.gz
   - class: File
-    path: ../test-data/1KG_phase3_subset_chr3.vcf.gz
+    path: ../test-data/vcf/1KG_phase3_subset_chr3.vcf.gz
