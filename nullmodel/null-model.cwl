@@ -44,6 +44,7 @@ requirements:
     dockerPull: uwgac/topmed-master:2.6.0
   ResourceRequirement:
     coresMin: 2
+    ramMin: $(2000 + inputs.phenotype_file.size/1000000)
   InlineJavascriptRequirement: {}
   InitialWorkDirRequirement:
     listing:
