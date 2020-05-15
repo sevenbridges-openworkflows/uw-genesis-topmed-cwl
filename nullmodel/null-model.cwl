@@ -1,5 +1,16 @@
 #!/usr/bin/env cwl-runner
 
+# The report tool (`null_model_report.R`) needs the params file produced by the
+# `null_model.R` script. But this dependency is hidden. The params file is given
+# a fixed name `null_model.config.null_model.params`. This params file has the
+# absolute path to the input files that were originally passed to
+# `null_model.R`. 
+# For this reason, it is best if the two scripts are run in the same docker
+# container, one after the other, rather than as separate tools. 
+# If run as separate tools we will have to recreate the 
+# `null_model.config.null_model.params` file, replacing the old absolute paths
+# with the new paths to the data files. 
+
 class: CommandLineTool
 cwlVersion: v1.0
 label: UW GENESIS null_model.R
@@ -25,7 +36,6 @@ doc: |
       - Allow heterogeneous variance by `group_var`
       - Include covariates and PCs as fixed effects
       - Include kinship as random effect
-
 $namespaces:
   sbg: https://sevenbridges.com
 
@@ -34,6 +44,7 @@ requirements:
     dockerPull: uwgac/topmed-master:2.6.0
   ResourceRequirement:
     coresMin: 2
+  InlineJavascriptRequirement: {}
   InitialWorkDirRequirement:
     listing:
     - $(inputs.phenotype_file)
@@ -79,9 +90,6 @@ requirements:
         mv *.html $REPORTDIR/
         mv *.Rmd $REPORTDIR/
 
-
-  InlineJavascriptRequirement: {}
-
 inputs:
   covariates:
     doc: |-
@@ -96,7 +104,8 @@ inputs:
     type: string
   outcome_is_binary:
     doc: |-
-      TRUE if outcome is a binary (case/control) variable; FALSE if outcome is a continuous variable.
+      TRUE if outcome is a binary (case/control) variable; 
+      FALSE if outcome is a continuous variable.
     type:
       type: enum
       symbols:
