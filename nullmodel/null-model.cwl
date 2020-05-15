@@ -48,24 +48,21 @@ requirements:
   InlineJavascriptRequirement: {}
   InitialWorkDirRequirement:
     listing:
-    - $(inputs.phenotype_file)
-    - $(inputs.pca_file)
-    - $(inputs.relatedness_matrix_file)
     - entryname: null_model.config
       entry: |
         # From https://github.com/UW-GAC/analysis_pipeline#null-model
         out_prefix $(inputs.out_prefix)
-        phenotype_file $(inputs.phenotype_file.basename)
+        phenotype_file $(inputs.phenotype_file.path)
         outcome $(inputs.outcome)
         binary $(inputs.outcome_is_binary)
         ${
           if(inputs.pca_file) 
-            return "pca_file " + inputs.pca_file.basename
+            return "pca_file " + inputs.pca_file.path
           else return ""
         }
         ${
           if(inputs.relatedness_matrix_file) 
-            return "relatedness_matrix_file " + inputs.relatedness_matrix_file.basename
+            return "relatedness_matrix_file " + inputs.relatedness_matrix_file.path
           else return ""
         }
         ${
@@ -99,7 +96,7 @@ inputs:
   out_prefix:
     doc: Prefix for files created by the software
     type: string?
-    default: genesis-topmed
+    default: genesis-topmed_null_model
   outcome:
     doc: Name of column in Phenotype File containing outcome variable.
     type: string
