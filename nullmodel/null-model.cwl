@@ -50,7 +50,7 @@ requirements:
     listing:
     - $(inputs.phenotype_file)
     - $(inputs.pca_file)
-    - $(inputs.relatedness_matrix)
+    - $(inputs.relatedness_matrix_file)
     - entryname: null_model.config
       entry: |
         # From https://github.com/UW-GAC/analysis_pipeline#null-model
@@ -64,8 +64,8 @@ requirements:
           else return ""
         }
         ${
-          if(inputs.relatedness_matrix) 
-            return "relatedness_matrix " + inputs.relatedness_matrix.basename
+          if(inputs.relatedness_matrix_file) 
+            return "relatedness_matrix_file " + inputs.relatedness_matrix_file.basename
           else return ""
         }
         ${
@@ -121,7 +121,7 @@ inputs:
     doc: RData file with AnnotatedDataFrame of phenotypes.
     type: File
     sbg:fileTypes: RDATA, Rdata
-  relatedness_matrix:
+  relatedness_matrix_file:
     doc: RData or GDS file with a kinship matrix or GRM.
     type: File?
     sbg:fileTypes: GDS, RDATA, RData
