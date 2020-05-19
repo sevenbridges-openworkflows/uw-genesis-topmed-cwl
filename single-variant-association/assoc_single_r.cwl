@@ -32,23 +32,15 @@ requirements:
         null_model_file "$(inputs.null_model_file.path)"
         phenotype_file "$(inputs.phenotype_file.path)"
         segment_file "$(inputs.segment_file.path)"
+    - entryname: script.sh
+      entry: |
+        set -x
+        # This is a bit of cleverness we have to do to extract the chromosome
+        # number from the segments file and pass it to the R script
+        CHROM="\$(awk 'NR==$(inputs.segment) {print $1}' $(inputs.segment_file.path))"
+        Rscript /usr/local/analysis_pipeline/R/assoc_single.R assoc_single.config --chromosome $CHROM --segment $(inputs.segment)
 
 inputs:
-  region:
-    type:
-      type: record
-      fields:
-        - name: chromosome
-          type: int
-          inputBinding:
-            prefix: --chromosome
-            position: 1
-        - name: segment
-          type: int
-          inputBinding:
-            prefix: --segment
-            position: 2
-
   file_prefix:
     type: string
   file_suffix:
@@ -74,6 +66,8 @@ inputs:
   phenotype_file:
     type: File
     sbg:fileTypes: Rdata
+  segment:
+    type: int
   segment_file:
     type: File
     sbg:fileTypes: TXT
@@ -85,7 +79,6 @@ outputs:
       glob: $(inputs.out_prefix)*
 
 baseCommand:
-- Rscript
-- /usr/local/analysis_pipeline/R/assoc_single.R
-- assoc_single.config
+- sh
+- script.sh
 arguments: []
