@@ -30,6 +30,7 @@ jobs:
       run: |
         cd single-variant-association
         cwltool --outdir exec define_segments_r.cwl 
+        cwltool --outdir exec filter_segments.cwl job-filter_segments.yml
 
   test-assoc_single:
     runs-on: ubuntu-latest
