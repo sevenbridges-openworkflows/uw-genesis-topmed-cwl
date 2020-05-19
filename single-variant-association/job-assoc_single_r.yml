@@ -1,0 +1,35 @@
+# cwltool --outdir exec assoc_single_r.cwl job-assoc_single_r.yml
+
+out_prefix: sva_test
+
+# This combination of chrom and segment will give us 
+# Running on 138 variants with MAC >= 5
+region:
+  chromosome: 22
+  segment: 297
+# as a cross check the combination 22, 53 will not work, because line 53 is for
+# chromosome 3, even though the segment marked in line 53 is good also for chrom
+# 22. As a double verification, we can see that passing 3, 53 will work.
+
+file_prefix: 1KG_phase3_subset_chr
+file_suffix: .gds
+
+gds_files:
+  - class: File
+    path: ../test-data/sva/1KG_phase3_subset_chr22.gds
+  - class: File
+    path: ../test-data/sva/1KG_phase3_subset_chr11.gds
+  - class: File
+    path: ../test-data/sva/1KG_phase3_subset_chr3.gds
+
+null_model_file:
+  class: File
+  path: ../test-data/sva/null_model_invnorm.RData
+
+phenotype_file:
+  class: File
+  path: ../test-data/sva/phenotypes.RData
+
+segment_file:
+  class: File
+  path: ../test-data/sva/segments.txt
