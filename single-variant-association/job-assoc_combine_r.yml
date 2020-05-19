@@ -1,0 +1,12 @@
+# cwltool --outdir exec assoc_single_r.cwl job-assoc_single_r.yml
+
+out_prefix: sva_test
+chromosome: 22
+
+file_shards:
+  - class: File
+    path: ../test-data/sva/shards/sva_test_chr22_seg296.RData
+  - class: File
+    path: ../test-data/sva/shards/sva_test_chr22_seg297.RData
+  - class: File
+    path: ../test-data/sva/shards/sva_test_chr3_seg53.RData
