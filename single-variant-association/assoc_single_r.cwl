@@ -3,7 +3,8 @@
 # We stage all the GDS files and select based on the chomosome and segment
 # inputs.
 # The segment refers to the line number (starting at 1) of the segment_file
-# The segment file contains the chromosome number. Howeever, the script can not
+# (segment 1 turns out to be the header line)
+# The segment file contains the chromosome number. However, the script can not
 # infer this from the line.
 # However, it checks the passed chromosome number against the chromosome number
 # in the segment file to make sure they are consistent.
