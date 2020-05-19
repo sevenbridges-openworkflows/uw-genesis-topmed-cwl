@@ -49,6 +49,18 @@ inputs:
       prefix: --segment_length
 
 outputs:
+  chromosomes:
+    type: int[]
+    outputBinding:
+      outputEval: |-
+        ${
+          // A simple script to generate a list of chromosomes to scatter over
+          var out = []
+          for(var i = 1; i < 25; i++) {
+            out.push(i)
+          }
+          return out
+        }
   segments:
     type: int[]
     outputBinding:
