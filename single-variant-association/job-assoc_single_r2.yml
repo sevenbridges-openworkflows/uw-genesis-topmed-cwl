@@ -9,15 +9,15 @@ out_prefix: sva_test
 segment: 2
 
 file_prefix: 1KG_phase3_subset_chr
-file_suffix: .gds
+file_suffix: .vcf.gz.gds
 
 gds_files:
   - class: File
-    path: ../test-data/sva/1KG_phase3_subset_chr22.gds
+    path: ../test-data/sva/1KG_phase3_subset_chr22.vcf.gz.gds
   - class: File
-    path: ../test-data/sva/1KG_phase3_subset_chr11.gds
+    path: ../test-data/sva/1KG_phase3_subset_chr11.vcf.gz.gds
   - class: File
-    path: ../test-data/sva/1KG_phase3_subset_chr3.gds
+    path: ../test-data/sva/1KG_phase3_subset_chr3.vcf.gz.gds
 
 null_model_file:
   class: File
