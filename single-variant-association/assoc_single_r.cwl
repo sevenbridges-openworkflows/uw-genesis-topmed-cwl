@@ -38,7 +38,12 @@ requirements:
         # This is a bit of cleverness we have to do to extract the chromosome
         # number from the segments file and pass it to the R script
         CHROM="\$(awk 'NR==$(inputs.segment) {print $1}' $(inputs.segment_file.path))"
-        Rscript /usr/local/analysis_pipeline/R/assoc_single.R assoc_single.config --chromosome $CHROM --segment $(inputs.segment)
+        
+        if test -f "$(inputs.file_prefix)$CHROM$(inputs.file_suffix)"; then
+          Rscript /usr/local/analysis_pipeline/R/assoc_single.R assoc_single.config --chromosome $CHROM --segment $(inputs.segment)
+        else
+          echo "The corresponding GDS file was not found"
+        fi
 
 inputs:
   file_prefix:
@@ -74,7 +79,7 @@ inputs:
 
 outputs:
   assoc_single:
-    type: File
+    type: File?
     outputBinding:
       glob: $(inputs.out_prefix)*
 

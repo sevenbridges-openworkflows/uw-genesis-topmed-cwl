@@ -1,11 +1,12 @@
 # cwltool --outdir exec assoc_single_r.cwl job-assoc_single_r.yml
 
+# This checks to see that assoc_single_r does not fail when passed a segment
+# for which there is no GDS file
+
 out_prefix: sva_test
 
-# This segment will give us 
-# Running on 138 variants with MAC >= 5
-# on chromosome: 22
-segment: 297
+# This segment asks for chrom 1 which does not exist. We should exit gracefully
+segment: 2
 
 file_prefix: 1KG_phase3_subset_chr
 file_suffix: .gds

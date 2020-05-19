@@ -58,3 +58,4 @@ jobs:
       run: |
         cd single-variant-association
         cwltool --outdir exec assoc_single_r.cwl job-assoc_single_r.yml
+        cwltool --outdir exec assoc_single_r.cwl job-assoc_single_r2.yml
