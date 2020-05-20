@@ -17,7 +17,8 @@ def main():
             chrom = line.split()[0]
             if file_prefix + chrom + file_suffix + ".gds" in available_gds_files:
                 chromosomes_present.add(chrom)
-                segments += [n + 1] # R uses 1 indexing
+                segments += [n]
+                # R uses 1 indexing, but line 0 is the header, so it all works out
 
     with open("chromosomes_present.txt", "w") as f:
         f.write(",".join([str(c) for c in chromosomes_present]))
