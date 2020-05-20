@@ -1,11 +1,6 @@
 #!/usr/bin/env cwl-runner
 
 # This wraps the define_segments_r.cwl 
-# The one bit of cleverness in this script is the use of loadContents and a
-# JS expression to create a list of integers representing the lines in the
-# segments.txt file. We can scatter over this list to drive assoc_single_r.cwl
-# It is possible to fail this expression if the segments file gets too big. 
-# However, at that stage you are probably scattering over too many segments
 
 class: CommandLineTool
 cwlVersion: v1.0

@@ -1,5 +1,9 @@
 #!/usr/bin/env cwl-runner
 
+# Python script to determine which segment lines are valid for our given data
+# set. The resulting list of segments can be used to scatter assoc_single_r.cwl
+# and the chromosomes can be used to scatter assoc_gather_r.cwl
+
 class: CommandLineTool
 cwlVersion: v1.0
 doc: |
