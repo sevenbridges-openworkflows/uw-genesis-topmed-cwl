@@ -1,7 +1,5 @@
 # cwltool --outdir exec single-variant-association-wf.cwl job-single-variant-association-wf.yml
 
-# n_segments: 20
-
 gds_files:
   - class: File
     path: ../test-data/sva/1KG_phase3_subset_chr22.vcf.gz.gds

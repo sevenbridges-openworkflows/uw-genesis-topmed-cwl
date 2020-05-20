@@ -118,3 +118,32 @@ jobs:
       run: |
         cd single-variant-association
         cwltool --outdir exec assoc_plots_r.cwl job-assoc_plots_r.yml
+
+  test-sva-wf:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.6]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Cache docker
+      uses: actions/cache@v1
+      env:
+        cache-name: cache-docker-image
+      with:
+        path: /var/lib/docker
+        key: ${{ runner.os }}-build-${{ env.cache-name }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install cwltool
+    - name: Test with cwltool
+      run: |
+        cd single-variant-association
+        cwltool --outdir exec single-variant-association-wf.cwl job-single-variant-association-wf.yml
+    

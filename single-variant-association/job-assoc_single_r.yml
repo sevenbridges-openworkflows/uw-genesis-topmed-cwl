@@ -5,7 +5,7 @@ out_prefix: sva_test
 # This segment will give us 
 # Running on 138 variants with MAC >= 5
 # on chromosome: 22
-segment: "297"
+segment: "295"
 
 file_prefix: 1KG_phase3_subset_chr
 file_suffix: .vcf.gz.gds
