@@ -8,9 +8,9 @@ $namespaces:
   sbg: https://sevenbridges.com
 
 requirements:
+  InlineJavascriptRequirement: {}
   ScatterFeatureRequirement: {}
   StepInputExpressionRequirement: {}
-  InlineJavascriptRequirement: {}
 
 inputs:
   gds_files:
@@ -43,21 +43,21 @@ inputs:
     default: 10000
 
 outputs:
-  plots:
-    type: File[]
-    outputSource: plot/plots
   data:
     type: File[]
     outputSource: combine_shards/combined
+  plots:
+    type: File[]
+    outputSource: plot/plots
 
 steps:
 - id: define_segments
   in:
-    genome_build: 
+    genome_build:
       source: genome_build
-    n_segments: 
+    n_segments:
       source: n_segments
-    segment_length: 
+    segment_length:
       source: segment_length
   run: define_segments_r.cwl
   out:
@@ -73,13 +73,13 @@ steps:
   - file_suffix
 - id: filter_segments
   in:
-    file_prefix: 
+    file_prefix:
       source: split_filename/file_prefix
-    file_suffix:  
+    file_suffix:
       source: split_filename/file_suffix
-    gds_files:  
+    gds_files:
       source: gds_files
-    segment_file:  
+    segment_file:
       source: define_segments/segment_file
   run: filter_segments.cwl
   out:
@@ -87,23 +87,23 @@ steps:
   - segments
 - id: single_association
   in:
-    file_prefix:  
+    file_prefix:
       source: split_filename/file_prefix
-    file_suffix:  
+    file_suffix:
       source: split_filename/file_suffix
-    gds_files:  
+    gds_files:
       source: gds_files
-    genome_build:  
+    genome_build:
       source: genome_build
-    null_model_file:  
+    null_model_file:
       source: null_model_file
-    out_prefix:  
+    out_prefix:
       source: out_prefix
-    phenotype_file:  
+    phenotype_file:
       source: phenotype_file
-    segment:  
+    segment:
       source: filter_segments/segments
-    segment_file:  
+    segment_file:
       source: define_segments/segment_file
   scatter: segment
   run: assoc_single_r.cwl
@@ -111,21 +111,13 @@ steps:
   - assoc_single
 - id: combine_shards
   in:
-    chromosome:  
+    chromosome:
       source: filter_segments/chromosomes
-    file_shards:  
+    file_shards:
+      valueFrom: |-
+        ${ var file = []; for(var i = 0 ; i < self.length; i++) { if(self[i]) { file.push(self[i]) } } return file }
       source: single_association/assoc_single
-      valueFrom: ${
-        var file = [];
-        for(var i = 0 ; i < self.length; i++) {
-          if(self[i]) {
-            file.push(self[i])
-          }
-        }
-        return file
-        }
-
-    out_prefix:  
+    out_prefix:
       source: out_prefix
   scatter: chromosome
   run: assoc_combine_r.cwl
@@ -133,12 +125,16 @@ steps:
   - combined
 - id: plot
   in:
-    chromosomes:  
+    chromosomes:
       source: filter_segments/chromosomes
-    combined:  
+    combined:
       source: combine_shards/combined
-    out_prefix:  
+    out_prefix:
       source: out_prefix
   run: assoc_plots_r.cwl
   out:
   - plots
+
+hints:
+- class: sbg:maxNumberOfParallelInstances
+  value: '8'
