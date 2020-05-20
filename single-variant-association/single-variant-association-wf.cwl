@@ -124,6 +124,16 @@ steps:
       source: filter_segments/chromosomes
     file_shards:  
       source: single_association/assoc_single
+      valueFrom: ${
+        var file = [];
+        for(var i = 0 ; i < self.length; i++) {
+          if(self[i]) {
+            file.push(self[i])
+          }
+        }
+        return file
+        }
+
     out_prefix:  
       source: out_prefix
   scatter: chromosome
