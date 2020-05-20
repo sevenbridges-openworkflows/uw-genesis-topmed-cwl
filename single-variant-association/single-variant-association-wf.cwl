@@ -30,13 +30,13 @@ inputs:
     type: int?
   null_model_file:
     type: File
-    sbg:fileTypes: Rdata
+    sbg:fileTypes: RDATA
   out_prefix:
     type: string?
     default: sva_
   phenotype_file:
     type: File
-    sbg:fileTypes: Rdata
+    sbg:fileTypes: RDATA
   segment_length:
     doc: Segment length in kb
     type: int?
