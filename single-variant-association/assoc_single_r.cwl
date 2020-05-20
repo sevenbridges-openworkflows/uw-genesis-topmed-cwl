@@ -39,7 +39,7 @@ requirements:
         set -x
         # This is a bit of cleverness we have to do to extract the chromosome
         # number from the segments file and pass it to the R script
-        CHROM="$("$")(awk 'NR==$(inputs.segment) {print $1}' $(inputs.segment_file.path))"
+        CHROM="$("$")(awk 'NR==${return parseInt(inputs.segment) + 1} {print $1}' $(inputs.segment_file.path))"
         Rscript /usr/local/analysis_pipeline/R/assoc_single.R assoc_single.config --chromosome $CHROM --segment $(inputs.segment)
 
 inputs:
