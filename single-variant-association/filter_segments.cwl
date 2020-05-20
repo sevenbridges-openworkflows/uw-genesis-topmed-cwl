@@ -35,14 +35,13 @@ requirements:
             segments_file = "$(inputs.segment_file.path)"
 
             available_gds_files = set(glob.glob("*.gds"))
-            print(available_gds_files)
 
             chromosomes_present = set()
             segments = []
             with open(segments_file, "r") as f:
                 for n, line in enumerate(f.readlines()):
                     chrom = line.split()[0]
-                    if file_prefix + chrom + file_suffix + ".gds" in available_gds_files:
+                    if file_prefix + chrom + file_suffix in available_gds_files:
                         chromosomes_present.add(chrom)
                         segments += [n + 1] # R uses 1 indexing
 

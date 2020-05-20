@@ -1,7 +1,7 @@
 # cwltool --outdir exec define_segments.cwl job-define_segments.yml
 
 file_prefix: 1KG_phase3_subset_chr
-file_suffix: .vcf.gz
+file_suffix: .vcf.gz.gds
 
 gds_files:
   - class: File
