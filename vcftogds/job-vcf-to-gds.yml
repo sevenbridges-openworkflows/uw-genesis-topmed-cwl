@@ -1,4 +1,4 @@
-# cwltool --outdir exec vcf-to-gds.cwl job-vcf-to-gds.yml
+# cwltool --outdir exec vcf-to-gds-wf.cwl job-vcf-to-gds.yml
 
 vcf_files:
   - class: File

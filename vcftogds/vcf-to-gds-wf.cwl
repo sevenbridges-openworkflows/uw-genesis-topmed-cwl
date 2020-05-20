@@ -62,7 +62,7 @@ steps:
     - format
   scatter:
   - vcf_file
-  run: vcf-to-gds.cwl.steps/vcf2gds.cwl
+  run: vcf2gds.cwl
   out:
   - id: gds_output
   sbg:x: -71
@@ -73,7 +73,7 @@ steps:
   - id: vcf_file
     source: vcf_files
     valueFrom: $(self[0])
-  run: vcf-to-gds.cwl.steps/splitfilename.cwl
+  run: splitfilename.cwl
   out:
   - id: file_prefix
   - id: file_suffix
@@ -87,7 +87,7 @@ steps:
     source: sniff_filename/file_prefix
   - id: file_suffix
     source: sniff_filename/file_suffix
-  run: vcf-to-gds.cwl.steps/unique_variant_id.cwl
+  run: unique_variant_id.cwl
   out:
   - id: gds
   sbg:x: 138
@@ -105,7 +105,7 @@ steps:
     source: sniff_filename/file_suffix
   scatter:
   - gds_file
-  run: vcf-to-gds.cwl.steps/check_gds.cwl
+  run: check_gds.cwl
   out:
     - id: check_log
   sbg:x: 374.6356201171875
