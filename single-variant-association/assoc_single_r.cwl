@@ -22,6 +22,7 @@ requirements:
   ResourceRequirement:
     coresMin: 1
     ramMin: 2000
+  InlineJavascriptRequirement: {}
   InitialWorkDirRequirement:
     listing:
     - $(inputs.gds_files)
