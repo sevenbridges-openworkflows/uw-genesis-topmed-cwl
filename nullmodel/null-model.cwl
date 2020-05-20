@@ -74,7 +74,7 @@ requirements:
 
     - entryname: script.sh
       entry: |
-        set -x
+        set -xe
         cat null_model.config
 
         Rscript /usr/local/analysis_pipeline/R/null_model.R null_model.config
