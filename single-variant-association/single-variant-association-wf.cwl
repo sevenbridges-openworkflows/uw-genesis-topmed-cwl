@@ -49,15 +49,6 @@ outputs:
   data:
     type: File[]
     outputSource: combine_shards/combined
-  x1:
-    type: string[]
-    outputSource: filter_segments/chromosomes
-  x2:
-    type: string[]
-    outputSource: filter_segments/segments
-  x3:
-    type: File
-    outputSource: define_segments/segment_file
 
 steps:
 - id: define_segments
