@@ -1,0 +1,9 @@
+# cwltool --outdir exec assoc_plots_r.cwl job-assoc_plots_r.yml
+
+out_prefix: sva_test
+chromosomes: ["3", "22"]
+combined:
+  - class: File
+    path: ../test-data/sva/plots/sva_test_chr3.RData
+  - class: File
+    path: ../test-data/sva/plots/sva_test_chr22.RData
