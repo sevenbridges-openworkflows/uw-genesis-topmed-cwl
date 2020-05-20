@@ -13,7 +13,7 @@
 
 class: CommandLineTool
 cwlVersion: v1.0
-label: UW GENESIS null_model.R
+label: UW GAC (GENESIS) Null Model
 doc: |
   # Null model
   Association tests are done with a mixed model if a kinship matrix or GRM 

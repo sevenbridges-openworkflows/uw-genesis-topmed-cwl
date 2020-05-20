@@ -2,8 +2,17 @@
 
 class: Workflow
 cwlVersion: v1.0
+label: UW GAC (GENESIS) Singe Variant Association Workflow
 doc: |
-  UW GAC (GENESIS) Singe Variant Association Workflow
+  UW GAC (GENESIS) Singe Variant Association Workflow.
+
+  This is a CWL wrapper for the [UW GAC Single-Variant Association pipeline](https://github.com/UW-GAC/analysis_pipeline#single-variant) 
+
+  _Filename requirements_:
+  The input GDS file names should follow the pattern <A>chr<X>.<y>
+  For example: 1KG_phase3_subset_chr1.gds
+  Some of the tools inside the workflow infer the chromosome number from the
+  file by expecting this pattern of file name.
 $namespaces:
   sbg: https://sevenbridges.com
 
