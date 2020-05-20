@@ -62,9 +62,12 @@ outputs:
 steps:
 - id: define_segments
   in:
-    genome_build: genome_build
-    n_segments: n_segments
-    segment_length: segment_length
+    genome_build: 
+      source: genome_build
+    n_segments: 
+      source: n_segments
+    segment_length: 
+      source: segment_length
   run: define_segments_r.cwl
   out:
   - segment_file
@@ -79,43 +82,62 @@ steps:
   - file_suffix
 - id: filter_segments
   in:
-    file_prefix: split_filename/file_prefix
-    file_suffix: split_filename/file_suffix
-    gds_files: gds_files
-    segment_file: define_segments/segment_file
+    file_prefix: 
+      source: split_filename/file_prefix
+    file_suffix:  
+      source: split_filename/file_suffix
+    gds_files:  
+      source: gds_files
+    segment_file:  
+      source: define_segments/segment_file
   run: filter_segments.cwl
   out:
   - chromosomes
   - segments
 - id: single_association
   in:
-    file_prefix: split_filename/file_prefix
-    file_suffix: split_filename/file_suffix
-    gds_files: gds_files
-    genome_build: genome_build
-    null_model_file: null_model_file
-    out_prefix: out_prefix
-    phenotype_file: phenotype_file
-    segment: filter_segments/segments
-    segment_file: define_segments/segment_file
+    file_prefix:  
+      source: split_filename/file_prefix
+    file_suffix:  
+      source: split_filename/file_suffix
+    gds_files:  
+      source: gds_files
+    genome_build:  
+      source: genome_build
+    null_model_file:  
+      source: null_model_file
+    out_prefix:  
+      source: out_prefix
+    phenotype_file:  
+      source: phenotype_file
+    segment:  
+      source: filter_segments/segments
+    segment_file:  
+      source: define_segments/segment_file
   scatter: segment
   run: assoc_single_r.cwl
   out:
   - assoc_single
 - id: combine_shards
   in:
-    chromosome: filter_segments/chromosomes
-    file_shards: single_association/assoc_single
-    out_prefix: out_prefix
+    chromosome:  
+      source: filter_segments/chromosomes
+    file_shards:  
+      source: single_association/assoc_single
+    out_prefix:  
+      source: out_prefix
   scatter: chromosome
   run: assoc_combine_r.cwl
   out:
   - combined
 - id: plot
   in:
-    chromosomes: filter_segments/chromosomes
-    combined: combine_shards/combined
-    out_prefix: out_prefix
+    chromosomes:  
+      source: filter_segments/chromosomes
+    combined:  
+      source: combine_shards/combined
+    out_prefix:  
+      source: out_prefix
   run: assoc_plots_r.cwl
   out:
   - plots
