@@ -19,7 +19,8 @@ requirements:
       set -x
       export NSLOTS=$(inputs.cpu)
       Rscript /usr/local/analysis_pipeline/R/vcf2gds.R vcf2gds.config
-  
+      cp vcf2gds.config vcf2gds.config.log
+
   - entryname: vcf2gds.config
     writable: false
     entry: |-

@@ -1,6 +1,8 @@
+#!/usr/bin/env cwl-runner
+
 class: Workflow
 cwlVersion: v1.0
-label: GENESIS VCF to GDS
+label: UW GAC (GENESIS) VCF to GDS
 doc: |-
   **VCF to GDS** workflow converts VCF or BCF files into Genomic Data Structure
   (GDS) format. GDS files are required by all workflows utilizing the GENESIS or
@@ -11,6 +13,8 @@ doc: |-
   For example: 1KG_phase3_subset_chr1.vcf.gz
   Some of the tools inside the workflow infer the chromosome number from the
   file by expecting this pattern of file name.
+$namespaces:
+  sbg: https://sevenbridges.com
 
 requirements:
 - class: ScatterFeatureRequirement
@@ -65,19 +69,15 @@ steps:
   run: vcf2gds.cwl
   out:
   - id: gds_output
-  sbg:x: -71
-  sbg:y: 184
-
 - id: sniff_filename
   in:
   - id: vcf_file
-    source: vcf_files
     valueFrom: $(self[0])
+    source: vcf_files
   run: splitfilename.cwl
   out:
   - id: file_prefix
   - id: file_suffix
-
 - id: unique_variant_id
   label: Unique Variant ID
   in:
@@ -90,8 +90,6 @@ steps:
   run: unique_variant_id.cwl
   out:
   - id: gds
-  sbg:x: 138
-  sbg:y: 97
 - id: check_gds
   label: Check GDS
   in:
@@ -107,14 +105,10 @@ steps:
   - gds_file
   run: check_gds.cwl
   out:
-    - id: check_log
-  sbg:x: 374.6356201171875
-  sbg:y: 303.9109191894531
+  - id: check_log
 
 hints:
 - class: sbg:AWSInstanceType
   value: c5.18xlarge;ebs-gp2;700
 - class: sbg:maxNumberOfParallelInstances
   value: '5'
-$namespaces:
-  sbg: https://sevenbridges.com
