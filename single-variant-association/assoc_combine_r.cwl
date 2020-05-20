@@ -31,7 +31,7 @@ requirements:
 
 inputs:
   chromosome:
-    type: int
+    type: string
     inputBinding:
       prefix: --chromosome
   file_shards:

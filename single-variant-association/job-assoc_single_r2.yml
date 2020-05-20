@@ -6,7 +6,7 @@
 out_prefix: sva_test
 
 # This segment asks for chrom 1 which does not exist. We should exit gracefully
-segment: 2
+segment: "2"
 
 file_prefix: 1KG_phase3_subset_chr
 file_suffix: .vcf.gz.gds

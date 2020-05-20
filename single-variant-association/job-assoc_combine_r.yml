@@ -1,7 +1,7 @@
 # cwltool --outdir exec assoc_single_r.cwl job-assoc_single_r.yml
 
 out_prefix: sva_test
-chromosome: 22
+chromosome: "22"
 
 file_shards:
   - class: File

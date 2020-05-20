@@ -68,7 +68,7 @@ inputs:
     type: File
     sbg:fileTypes: Rdata
   segment:
-    type: int
+    type: string
   segment_file:
     type: File
     sbg:fileTypes: TXT
