@@ -5,9 +5,7 @@
 class: CommandLineTool
 cwlVersion: v1.0
 doc: |
-  Wraps the UW-GAC TopMED tool `define_segments.R`. Also produces a list of
-  integers representing the lines in the segments.txt file that can be used to
-  scatter assoc_single_r.cwl
+  Wraps the UW-GAC TopMED tool `define_segments.R`.
 $namespaces:
   sbg: https://sevenbridges.com
 
