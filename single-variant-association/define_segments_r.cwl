@@ -44,7 +44,7 @@ inputs:
       prefix: --segment_length
 
 outputs:
-  segments_file:
+  segment_file:
     type: File
     outputBinding:
       glob: segments.txt
