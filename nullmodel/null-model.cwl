@@ -63,7 +63,7 @@ requirements:
         }
         ${
           if(inputs.covariates) 
-            return "covars \"" + inputs.covariates + "\""
+            return 'covars "' + inputs.covariates + '"'
           else return ""
         }
         out_phenotype_file $(inputs.out_prefix)_phenotypes.Rdata
