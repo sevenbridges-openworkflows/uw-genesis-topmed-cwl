@@ -111,4 +111,4 @@ hints:
 - class: sbg:AWSInstanceType
   value: c5.18xlarge;ebs-gp2;700
 - class: sbg:maxNumberOfParallelInstances
-  value: '5'
+  value: '8'
