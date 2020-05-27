@@ -42,10 +42,6 @@ $namespaces:
 requirements:
   DockerRequirement:
     dockerPull: uwgac/topmed-master:2.6.0
-  ResourceRequirement:
-    coresMin: 2
-    ramMin: $(2000 + inputs.phenotype_file.size/1000000)
-  InlineJavascriptRequirement: {}
   InitialWorkDirRequirement:
     listing:
     - entryname: null_model.config
@@ -67,11 +63,10 @@ requirements:
         }
         ${
           if(inputs.covariates) 
-            return "covars " + inputs.covariates
+            return "covars \"" + inputs.covariates + "\""
           else return ""
         }
         out_phenotype_file $(inputs.out_prefix)_phenotypes.Rdata
-
     - entryname: script.sh
       entry: |
         set -xe
@@ -89,11 +84,16 @@ requirements:
         mkdir $REPORTDIR
         mv *.html $REPORTDIR/
         mv *.Rmd $REPORTDIR/
+  InlineJavascriptRequirement: {}
+  ResourceRequirement:
+    coresMin: 2
+    ramMin: $(2000 + inputs.phenotype_file.size/1000000)
 
 inputs:
   covariates:
     doc: |-
-      Names of columns phenotype_file containing covariates, quoted and separated by spaces.
+      Names of columns phenotype_file containing covariates. Separate by spaces.
+      e.g. `gender height healthy`
     type: string?
   out_prefix:
     doc: Prefix for files created by the software
