@@ -51,6 +51,7 @@ requirements:
         phenotype_file $(inputs.phenotype_file.path)
         outcome $(inputs.outcome)
         binary $(inputs.outcome_is_binary)
+        n_pcs $(inputs.n_pcs)
         ${
           if(inputs.pca_file) 
             return "pca_file " + inputs.pca_file.path
@@ -90,6 +91,10 @@ requirements:
     ramMin: $(2000 + inputs.phenotype_file.size/1000000)
 
 inputs:
+  n_pcs:
+    doc: Number of PCs to include as covariates.
+    type: int?
+    default: 0
   covariates:
     doc: |-
       Names of columns phenotype_file containing covariates. Separate by spaces.

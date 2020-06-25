@@ -31,3 +31,4 @@ jobs:
         cd nullmodel
         cwltool --outdir exec null-model.cwl job-null-model.yml 
         cwltool --outdir exec null-model.cwl job-null-model2.yml 
+        cwltool --outdir exec null-model.cwl job-null-model3.yml 

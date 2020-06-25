@@ -1,0 +1,14 @@
+# cwltool --outdir exec null-model.cwl job-null-model.yml
+
+phenotype_file:
+  class: File
+  path: ../test-data/nullmodel/1KG_simulated_phenotypes.RData
+pca_file:  
+  class: File
+  path: ../test-data/nullmodel/1KG_pcair.RData
+relatedness_matrix_file:
+  class: File
+  path: ../test-data/nullmodel/1KG_pcrelate_Matrix.RData
+outcome: outcome
+covariates: sex status
+n_pca: 8
