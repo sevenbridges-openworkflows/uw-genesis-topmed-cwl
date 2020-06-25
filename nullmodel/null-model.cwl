@@ -88,7 +88,7 @@ requirements:
   InlineJavascriptRequirement: {}
   ResourceRequirement:
     coresMin: 2
-    ramMin: $(2000 + inputs.phenotype_file.size/1000000)
+    ramMin: $(Math.round(2000 + inputs.phenotype_file.size/1000000))
 
 inputs:
   n_pcs:
