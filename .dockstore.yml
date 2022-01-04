@@ -1,0 +1,9 @@
+version: 1.0
+workflows:
+   - name: UW_GAC_GENESIS_VCF_to_GDS
+     subclass: CWL
+     publish: True
+     primaryDescriptorPath: /vcftogds/vcf-to-gds-wf.cwl
+   - name: UW_GAC_GENESIS_Singe_Variant_Association_Workflow
+     subclass: CWL
+     primaryDescriptorPath: /single-variant-association/single-variant-association-wf.cwl
